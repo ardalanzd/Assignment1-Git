@@ -4,14 +4,20 @@ public class GameEngine {
     private int target;
     private int attempts;
     private boolean gameWon;
+ HEAD
     private boolean userQuit;
+
+    private boolean hintsEnabled;
 
     public GameEngine(int min, int max) {
         this.min = min;
         this.max = max;
         this.attempts = 0;
         this.gameWon = false;
+ HEAD
         this.userQuit = false;
+
+        this.hintsEnabled = true;
         reset();
     }
 
@@ -27,10 +33,29 @@ public class GameEngine {
         if (guess == target) {
             gameWon = true;
             return new GuessResult(true, "Correct! You guessed it in " + attempts + " attempts.", attempts);
+ HEAD
         } else if (guess < target) {
             return new GuessResult(false, "Too low! Try a higher number.", attempts);
         } else {
             return new GuessResult(false, "Too high! Try a lower number.", attempts);
+
+this.hintsEnabled = true;
+        reset();   
+    }
+        
+    public GuessResult makeGuess(int guess) {
+        // Check if user wants to quit (negative number)
+        if (guess < 0) {
+            userQuit = true;        } else {
+            String hint = getHint(guess);
+            GuessResult result;
+            if (guess < target) {
+                result = new GuessResult(false, "Too low!", attempts);
+            } else {
+                result = new GuessResult(false, "Too high!", attempts);
+            }
+            result.setHint(hint);
+            return result;
         }
     }
 
@@ -59,6 +84,28 @@ public class GameEngine {
 
     public int getMax() {
         return max;
+    }
+
+    public boolean isHintsEnabled() {
+        return hintsEnabled;
+    }
+
+    public void setHintsEnabled(boolean enabled) {
+        this.hintsEnabled = enabled;
+    }
+
+    private String getHint(int guess) {
+        if (!hintsEnabled) {
+            return "";
+        }
+
+        int diff = Math.abs(target - guess);
+        if (attempts >= 3 && diff <= 10) {
+            return " HINT: You're very close!";
+        } else if (attempts >= 5 && diff <= 20) {
+            return " HINT: Getting warmer!";
+        }
+        return "";
     }
 
     // For testing purposes only
