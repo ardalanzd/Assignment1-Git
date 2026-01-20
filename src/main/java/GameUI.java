@@ -10,17 +10,28 @@ public class GameUI {
     }
 
     public void start() {
- HEAD
-        while (!engine.isGameWon() && !engine.hasUserQuit()) {
-            System.out.print("Guess a number between " + engine.getMin() + " and " + engine.getMax() + " (or negative to exit): ");
+        System.out.println("I picked a number. Try to guess it!");
 
-        while (!engine.isGameWon() && !engine.isGameOver()) {
-            System.out.print("Guess a number between " + engine.getMin() + " and " + engine.getMax() + ": ");
- e367776 (Implement max attempts logic and game over condition)
-            int guess = Utils.readInt(scanner);
+        while (!engine.isGameOver()) {
+            System.out.print("Enter your guess (or 'q' to quit): ");
+            String input = scanner.nextLine().trim();
 
-            GuessResult result = engine.makeGuess(guess);
-            System.out.println(result.getMessage());
+            if (input.equalsIgnoreCase("q")) {
+                System.out.println("Quitting game.");
+                return;
+            }
+
+            int guess;
+            try {
+                guess = Integer.parseInt(input);
+            } catch (NumberFormatException e) {
+                System.out.println("Please enter a valid number.");
+                continue;
+            }
+
+            String result = engine.checkGuess(guess);
+            System.out.println(result);
         }
     }
 }
+
