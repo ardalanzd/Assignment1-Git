@@ -10,13 +10,15 @@ public class GameUI {
     }
 
     public void start() {
-        while (!engine.isGameWon() && !engine.hasUserQuit()) {
-            System.out.print("Guess a number between " + engine.getMin() + " and " + engine.getMax() + " (or negative to exit): ");
+        System.out.println("I picked a number. Try to guess it!");
+
+        while (!engine.isGameOver()) {
+            System.out.print("Guess a number between " + engine.getMin() + " and " + engine.getMax() + " (or -1 to quit): ");
             int guess = Utils.readInt(scanner);
 
-String result = engine.checkGuess(guess);
-System.out.println(result);
-System.out.println(result);
+            String result = engine.checkGuess(guess);
+            System.out.println(result);
         }
     }
 }
+
