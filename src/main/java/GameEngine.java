@@ -22,7 +22,6 @@ public class GameEngine {
         this.gameWon = false;
         this.userQuit = false;
         this.gameOver = false;
-
         this.hintsEnabled = true;
     }
 
