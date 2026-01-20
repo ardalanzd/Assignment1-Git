@@ -16,7 +16,7 @@ public class GameUI {
 
 String result = engine.checkGuess(guess);
 System.out.println(result);
-            System.out.println(result.getMessage());
+System.out.println(result);
         }
     }
 }
