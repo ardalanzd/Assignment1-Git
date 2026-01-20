@@ -2,12 +2,8 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println(" Welcome to the Number Guessing Game! ");
- HEAD
-        // Version 1.1 - Added quit functionality
-
+        System.out.println("Welcome to the Number Guessing Game!");
         System.out.println("Good luck!");
- dev
 
         Scanner scanner = new Scanner(System.in);
         GameEngine engine = new GameEngine(1, 100);
@@ -16,20 +12,13 @@ public class Main {
         boolean playAgain = true;
         while (playAgain) {
             ui.start();
-
-            if (!engine.hasUserQuit()) {
-                System.out.print("Play again? (y/n): ");
-                String response = scanner.nextLine().trim().toLowerCase();
-                playAgain = response.equals("y") || response.equals("yes");
-
-                if (playAgain) {
-                    engine.reset();
-                }
-            } else {
-                playAgain = false;
-            }
+            System.out.print("Play again? (y/n): ");
+            String ans = scanner.nextLine().trim().toLowerCase();
+            playAgain = ans.equals("y") || ans.equals("yes");
         }
 
+        scanner.close();
         System.out.println("Thanks for playing!");
     }
 }
+
