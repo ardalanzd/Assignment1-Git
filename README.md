@@ -17,3 +17,22 @@
 - dev: Integrated all features with a clean and readable commit history.
 - documentation: Contains project documentation and Git workflow learning summary.
 
+## Learning Summary
+
+### Merge vs Rebase vs Squash vs Cherry-pick
+- **Merge** preserves branch history and shows where work came from.
+- **Rebase** rewrites history to create a linear commit log.
+- **Squash** combines multiple commits into one clean commit before merging.
+- **Cherry-pick** applies a single specific commit to another branch.
+
+### Observations
+- feature1 used merge and preserved branch structure.
+- feature2 used rebase and required resolving conflicts commit-by-commit.
+- feature3 was squashed into a single commit before rebasing, making conflict resolution easier and history cleaner.
+
+### When to Use Each
+- Use **merge** for shared branches.
+- Use **rebase** when working alone to keep history clean.
+- Use **squash** before merging feature branches into dev.
+- Use **cherry-pick** for urgent fixes that must go directly into main.
+
