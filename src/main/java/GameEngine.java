@@ -10,7 +10,6 @@ public class GameEngine {
     private boolean userQuit;
 
     private boolean gameOver;
- 45aa640 (Add maxAttempts constant and game over state)
 
     public GameEngine(int min, int max) {
         this.min = min;
@@ -20,7 +19,6 @@ public class GameEngine {
  HEAD
         this.userQuit = false;
         this.gameOver = false;
- 45aa640 (Add maxAttempts constant and game over state)
         reset();
     }
 
@@ -55,7 +53,6 @@ public class GameEngine {
             }
             result.setRemainingAttempts(remaining);
             return result;
- e367776 (Implement max attempts logic and game over condition)
         }
     }
 
@@ -67,7 +64,6 @@ public class GameEngine {
         userQuit = false;
 
         gameOver = false;
- 45aa640 (Add maxAttempts constant and game over state)
     }
 
     public boolean isGameWon() {
@@ -80,7 +76,6 @@ public class GameEngine {
 
     public boolean isGameOver() {
         return gameOver;
- 45aa640 (Add maxAttempts constant and game over state)
     }
 
     public int getAttempts() {
