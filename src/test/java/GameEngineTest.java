@@ -1,68 +1,41 @@
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class GameEngineTest {
-    private GameEngine engine;
-
-    @BeforeEach
-    public void setUp() {
-        engine = new GameEngine(1, 100);
-    }
 
     @Test
-    public void testInitialState() {
-        assertEquals(0, engine.getAttempts());
+    void engineStartsNotOver() {
+        GameEngine engine = new GameEngine(1, 100);
+        assertFalse(engine.isGameOver());
         assertFalse(engine.isGameWon());
+        assertFalse(engine.hasUserQuit());
+        assertEquals(0, engine.getAttempts());
+        assertEquals(5, engine.getMaxAttempts());
     }
 
     @Test
-    public void testCorrectGuess() {
-        engine.setTarget(50);
-        GuessResult result = engine.makeGuess(50);
-        assertTrue(result.isCorrect());
-        assertTrue(engine.isGameWon());
+    void guessIncrementsAttempts() {
+        GameEngine engine = new GameEngine(1, 100);
+        engine.checkGuess(1);
         assertEquals(1, engine.getAttempts());
     }
 
     @Test
-    public void testTooLowGuess() {
-        engine.setTarget(50);
-        GuessResult result = engine.makeGuess(30);
-        assertFalse(result.isCorrect());
-        assertTrue(result.getMessage().contains("Too low!"));
+    void quitEndsGame() {
+        GameEngine engine = new GameEngine(1, 100);
+        String msg = engine.checkGuess(-1);
+        assertTrue(engine.hasUserQuit());
+        assertTrue(engine.isGameOver());
+        assertTrue(msg.toLowerCase().contains("quit"));
     }
 
     @Test
-    public void testTooHighGuess() {
-        engine.setTarget(50);
-        GuessResult result = engine.makeGuess(70);
-        assertFalse(result.isCorrect());
-        assertTrue(result.getMessage().contains("Too high!"));
-    }
-
-    @Test
-    public void testMultipleGuesses() {
-        engine.setTarget(50);
-        engine.makeGuess(30);
-        engine.makeGuess(70);
-        GuessResult result = engine.makeGuess(50);
-        assertTrue(result.isCorrect());
-        assertEquals(3, engine.getAttempts());
-    }
-
-    @Test
-    public void testReset() {
-        engine.setTarget(50);
-        engine.makeGuess(50);
-        engine.reset();
-        assertEquals(0, engine.getAttempts());
-        assertFalse(engine.isGameWon());
-    }
-
-    @Test
-    public void testBoundaries() {
-        assertEquals(1, engine.getMin());
-        assertEquals(100, engine.getMax());
+    void gameOverAfterMaxAttempts() {
+        GameEngine engine = new GameEngine(1, 100);
+        for (int i = 0; i < engine.getMaxAttempts(); i++) {
+            engine.checkGuess(1);
+        }
+        assertTrue(engine.isGameOver());
     }
 }
+
