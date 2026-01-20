@@ -14,7 +14,8 @@ public class GameUI {
             System.out.print("Guess a number between " + engine.getMin() + " and " + engine.getMax() + " (or negative to exit): ");
             int guess = Utils.readInt(scanner);
 
-            GuessResult result = engine.makeGuess(guess);
+String result = engine.checkGuess(guess);
+System.out.println(result);
             System.out.println(result.getMessage());
         }
     }
