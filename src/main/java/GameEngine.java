@@ -17,11 +17,10 @@ public class GameEngine {
         this.max = max;
         this.attempts = 0;
         this.gameWon = false;
-<<<<<<< HEAD
+ HEAD
         this.userQuit = false;
-=======
         this.gameOver = false;
->>>>>>> 45aa640 (Add maxAttempts constant and game over state)
+ 45aa640 (Add maxAttempts constant and game over state)
         reset();
     }
 
@@ -37,12 +36,12 @@ public class GameEngine {
         if (guess == target) {
             gameWon = true;
             return new GuessResult(true, "Correct! You guessed it in " + attempts + " attempts.", attempts);
-<<<<<<< HEAD
+ HEAD
         } else if (guess < target) {
             return new GuessResult(false, "Too low! Try a higher number.", attempts);
         } else {
             return new GuessResult(false, "Too high! Try a lower number.", attempts);
-=======
+
         } else if (attempts >= MAX_ATTEMPTS) {
             gameOver = true;
             return new GuessResult(false, "Game Over! You've used all " + MAX_ATTEMPTS + " attempts. The number was " + target + ".", attempts);
@@ -56,7 +55,7 @@ public class GameEngine {
             }
             result.setRemainingAttempts(remaining);
             return result;
->>>>>>> e367776 (Implement max attempts logic and game over condition)
+ e367776 (Implement max attempts logic and game over condition)
         }
     }
 
@@ -64,24 +63,24 @@ public class GameEngine {
         target = Utils.randomInt(min, max);
         attempts = 0;
         gameWon = false;
-<<<<<<< HEAD
+ HEAD
         userQuit = false;
-=======
+
         gameOver = false;
->>>>>>> 45aa640 (Add maxAttempts constant and game over state)
+ 45aa640 (Add maxAttempts constant and game over state)
     }
 
     public boolean isGameWon() {
         return gameWon;
     }
 
-<<<<<<< HEAD
+ HEAD
     public boolean hasUserQuit() {
         return userQuit;
-=======
+
     public boolean isGameOver() {
         return gameOver;
->>>>>>> 45aa640 (Add maxAttempts constant and game over state)
+ 45aa640 (Add maxAttempts constant and game over state)
     }
 
     public int getAttempts() {
